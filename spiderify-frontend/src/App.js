@@ -6,6 +6,7 @@ import {BrowserRouter , Switch , Route , Link} from 'react-router-dom'
 import About from './components/About'
 import FAQ from './components/FAQ'
 import Home from './components/Home'
+import Comment from './components/Comment'
 function App() {
 
 function buttonClicked (){
@@ -31,11 +32,21 @@ function buttonClicked (){
         </Route>
 
         <Route path="/about">
-        <About/>
+          <About/>
         </Route>
-        <Route path = "/contactus">
 
+        <Route path = "/contactus">
           <Home/>
+        </Route>
+        <Route path = '/Comment-test'>
+          <Comment 
+    title = "Nice, but faulty!"
+    content = "I got a faulty laptop from day 1! Before I ordered I made sure to ask the seller if it\u2019s NEW.  Well, I got it and it shuts down every 2 minutes. They offered refund, but I live outside the US and returning this mess will cost me a lot. I thought it was tested/upgraded as stated. How can they missed mines when it shuts off right after start up?  Now I\u2019ve trust issues with purchasing electronics online now."
+    date = "Reviewed in the United States on November 2, 2019"
+    author = "Candice"
+    sentiment = "0.00034245848655700684"
+  />
+
         </Route>
       </Switch>
         </div>
