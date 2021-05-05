@@ -24,14 +24,51 @@ class Comment extends Component {
     render() {
         return (
             <div>
-                <div style = {{backgroundColor : 'rgb(4, 158, 209)'}}>
-                   {this.state.title} is the title
+                <div style = {{backgroundColor : 'rgb(4, 158, 209)' , margin: '15% 10% 5% 10%'}}>
+                   <h3>
+                   {this.props.title}
+                   </h3>
                 </div>
             </div>
         );
     }
 
 
+}
+
+function CommentFunctional(props)
+{
+    return (
+        <div style = {{backgroundColor : 'rgb(4, 158, 209)' , marginBottom : '8px' , marginLeft : '14%' , marginRight : '14%' , borderRadius : '25px'  }}>
+            <div >
+                <h4 style = {{float : 'left' , marginTop : '1%' , marginLeft : '1%'}}>
+                    {props.commentSpec.author} : {props.commentSpec.title}
+                </h4>
+                <p style = {{float : "right" , marginTop : '1%' , marginRight : '1%' }}>
+                    {props.commentSpec.date}
+                </p>
+                <div style = {{clear : 'both' , backgroundColor : 'silver' , margin : '5px' , borderRadius : '5px' , color:'black'}}>
+                        <p >
+                            {props.commentSpec.content}
+                        </p>
+                    <div style = {{color : 'white'}}>
+                        <p style = {{float : 'left'}}> 
+                        analysed result : {props.commentSpec.sentiment}
+                        </p>
+                        <p style = {{float : 'right' }}>
+                        {props.commentSpec.verified && 'costumer is verified'}
+                        </p>
+                    </div>
+                </div>
+                <div style = {{clear : 'both'}}>
+                </div>
+            </div>
+        </div>
+    )
+}
+CommentFunctional.propTypes = 
+{
+    commentSpec : propTypes.object 
 }
 
 Comment.propTypes = {
@@ -44,3 +81,4 @@ Comment.propTypes = {
 };
 
 export default Comment ;
+export {CommentFunctional} ;
