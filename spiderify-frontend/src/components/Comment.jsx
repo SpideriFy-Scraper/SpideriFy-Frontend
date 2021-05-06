@@ -1,84 +1,81 @@
-import React , {Component}from 'react'
-import {} from 'reactstrap'
-import propTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-class Comment extends Component {
-    constructor(props) {
-        super(props);
-        
-        this.state = 
-        {
-            title : props.title ,
-            date : props.date , 
-            author : props.author ,
-            sentiment : props.sentiment , 
-            content : props.content , 
-            verified : props.verified
-        }
+const CommnetContainer = styled.div`
+  background-image: linear-gradient(
+    to bottom,
+    rgb(4, 98, 209),
+    rgb(0, 189, 255)
+  );
+  margin-bottom: 8px;
+  margin-left: 14%;
+  margin-right: 14%;
+  border-radius: 25px;
+`;
 
+const CommentHeader = styled.h4`
+  float: left;
+  margin-top: 1%;
+  margin-left: 1%;
+`;
 
-    }
-    
+const CommentDateSection = styled.p`
+  float: right;
+  margin-top: 1%;
+  margin-right: 1%;
+`;
 
+const CommentContentContainer = styled.div`
+  clear: both;
+  background-image: linear-gradient(to bottom right, white, rgb(153, 153, 153));
+  margin: 5px;
+  border-radius: 5px;
+  color: black;
+`;
 
-    render() {
-        return (
-            <div>
-                <div style = {{backgroundColor : 'rgb(4, 158, 209)' , margin: '15% 10% 5% 10%'}}>
-                   <h3>
-                   {this.props.title}
-                   </h3>
-                </div>
-            </div>
-        );
-    }
+const LeftParagraph = styled.p`
+  float: left;
+`;
 
+const RightParagraph = styled.p`
+  float: right;
+`;
 
+const WhiteDiv = styled.div`
+  color: white;
+`;
+
+const ClearBothDiv = styled.div`
+  clear: both;
+`;
+
+function Comment({ commentSpec }) {
+  return (
+    <CommnetContainer>
+      <div>
+        <CommentHeader>
+          {commentSpec.author} : {commentSpec.title}
+        </CommentHeader>
+        <CommentDateSection>{commentSpec.date}</CommentDateSection>
+        <CommentContentContainer>
+          <p>{commentSpec.content}</p>
+          <WhiteDiv>
+            <LeftParagraph>
+              analysed result : {commentSpec.sentiment}
+            </LeftParagraph>
+            <RightParagraph>
+              {commentSpec.verified && "costumer is verified"}
+            </RightParagraph>
+          </WhiteDiv>
+        </CommentContentContainer>
+        <ClearBothDiv />
+      </div>
+    </CommnetContainer>
+  );
 }
-
-function CommentFunctional(props)
-{
-    return (
-        <div style = {{backgroundImage : 'linear-gradient(to bottom , rgb(4 , 98 , 209) , rgb(0, 189, 255)' , marginBottom : '8px' , marginLeft : '14%' , marginRight : '14%' , borderRadius : '25px'  }}>
-            <div >
-                <h4 style = {{float : 'left' , marginTop : '1%' , marginLeft : '1%'}}>
-                    {props.commentSpec.author} : {props.commentSpec.title}
-                </h4>
-                <p style = {{float : "right" , marginTop : '1%' , marginRight : '1%' }}>
-                    {props.commentSpec.date}
-                </p>
-                <div style = {{clear : 'both' , backgroundImage : 'linear-gradient(to bottom right , white , rgb(153, 153, 153)'  , margin : '5px' , borderRadius : '5px' , color:'black'}}>
-                        <p >
-                            {props.commentSpec.content}
-                        </p>
-                    <div style = {{color : 'white'}}>
-                        <p style = {{float : 'left'}}> 
-                        analysed result : {props.commentSpec.sentiment}
-                        </p>
-                        <p style = {{float : 'right' }}>
-                        {props.commentSpec.verified && 'costumer is verified'}
-                        </p>
-                    </div>
-                </div>
-                <div style = {{clear : 'both'}}>
-                </div>
-            </div>
-        </div>
-    )
-}
-CommentFunctional.propTypes = 
-{
-    commentSpec : propTypes.object 
-}
-
 Comment.propTypes = {
-    title : propTypes.string ,
-    date : propTypes.string ,
-    author : propTypes.string , 
-    sentiment : propTypes.number , 
-    content : propTypes.string ,
-    verified : propTypes.bool
+  commentSpec: PropTypes.object,
 };
 
-export default Comment ;
-export {CommentFunctional} ;
+export default Comment;

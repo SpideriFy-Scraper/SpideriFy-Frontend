@@ -1,16 +1,16 @@
-import React , {Component} from 'react';
+import React from "react";
+import styled from "styled-components";
 
-import 'react-dom'
-class About extends Component {
-    render() {
-        return (
-            <div style = {{color : 'white'}}>
-                <h1> this is all about TIME</h1>
-            </div>
-        );
-    }
-}
+const HeaderContainer = styled.div`
+  color: "white";
+`;
 
+const About = () => {
+  return (
+    <HeaderContainer>
+      <h1> this is all about TIME</h1>
+    </HeaderContainer>
+  );
+};
 
-
-export default About ;
+export default About;
