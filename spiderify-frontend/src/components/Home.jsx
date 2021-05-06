@@ -26,6 +26,21 @@ const FormContainer = styled.div`
   }
 `;
 
+const FormWrapper = styled.div`
+  width : 30% ;
+  
+`
+
+const SearchButton = styled.button`
+  background-color : white ;
+  background-image : url(${process.env.PUBLIC_URL + 'search-icon.png'});
+  background-size : cover ;
+  display : flex;
+  width : 40px ;
+  margin-left : 4px ;
+  border-radius : 8px ;
+`;
+
 const WhiteHeader = styled.h3`
   color: white;
   font-size: 2rem;
@@ -62,22 +77,29 @@ const Home = () => {
     <>
       {isLoading && <Loading />}
       <FormContainer>
-        <Form>
-          <FormGroup>
-            <Label for="url-address">
-              <WhiteHeader>Please Enter You URL here</WhiteHeader>
-            </Label>
-            <Input
-              id="url-address"
-              type="url"
-              placeholder="Url Address"
-              onChange={onUrlChange}
-            />
-          </FormGroup>
-          <Button block color="secondary" onClick={onSearchClick}>
-            <h2> Search </h2>
-          </Button>
-        </Form>
+        <FormWrapper >
+          <Form>
+            <FormGroup>
+              <Label for="url-address">
+                <WhiteHeader>Please Enter You URL here</WhiteHeader>
+              </Label>
+              <div style = {{display : 'flex' , flexDirection : 'row'}}>
+                <Input
+                  id="url-address"
+                  type="url"
+                  placeholder="Url Address"
+                  style={{ display: 'flex' }}
+
+                  onChange={onUrlChange}
+                />
+
+                <SearchButton onClick={onSearchClick}>
+                </SearchButton>
+              </div>
+            </FormGroup>
+
+          </Form>
+        </FormWrapper>
       </FormContainer>
       <div style={{ overflow: "auto", margin: "1rem 0" }}>
         {loadedComments?.length && <CommentSection comments={loadedComments} />}

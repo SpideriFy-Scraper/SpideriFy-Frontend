@@ -5,13 +5,14 @@ import styled from "styled-components";
 const CommnetContainer = styled.div`
   background-image: linear-gradient(
     to bottom,
-    rgb(4, 98, 209),
-    rgb(0, 189, 255)
+    rgb(61, 75, 105),
+    rgb(14, 32, 69)
   );
   margin-bottom: 8px;
   margin-left: 14%;
   margin-right: 14%;
   border-radius: 25px;
+  color : white ;
 `;
 
 const CommentHeader = styled.h4`
