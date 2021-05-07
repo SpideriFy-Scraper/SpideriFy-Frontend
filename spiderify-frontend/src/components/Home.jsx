@@ -5,6 +5,7 @@ import Loading from "./Loading";
 import { comments } from "../comments-mock";
 import CommentSection from "./CommentSection";
 import axios from "axios";
+import DoubleChartContainer from './DoubleChartContainer'
 
 const FormContainer = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const FormContainer = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  width : 30% ;
+  width : 40% ;
   
 `
 
@@ -45,6 +46,7 @@ const WhiteHeader = styled.h3`
   color: white;
   font-size: 2rem;
 `;
+
 
 const Home = () => {
   const [urlInput, setUrlInput] = useState(null);
@@ -80,7 +82,7 @@ const Home = () => {
         <FormWrapper >
           <Form>
             <FormGroup>
-              <Label for="url-address">
+              <Label for="url-address" style = {{margin : 'auto'}}>
                 <WhiteHeader>Please Enter You URL here</WhiteHeader>
               </Label>
               <div style = {{display : 'flex' , flexDirection : 'row'}}>
@@ -89,7 +91,6 @@ const Home = () => {
                   type="url"
                   placeholder="Url Address"
                   style={{ display: 'flex' }}
-
                   onChange={onUrlChange}
                 />
 
@@ -101,6 +102,7 @@ const Home = () => {
           </Form>
         </FormWrapper>
       </FormContainer>
+
       <div style={{ overflow: "auto", margin: "1rem 0" }}>
         {loadedComments?.length && <CommentSection comments={loadedComments} />}
       </div>

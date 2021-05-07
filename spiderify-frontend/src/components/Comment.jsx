@@ -9,8 +9,6 @@ const CommnetContainer = styled.div`
     rgb(14, 32, 69)
   );
   margin-bottom: 8px;
-  margin-left: 14%;
-  margin-right: 14%;
   border-radius: 25px;
   color : white ;
 `;

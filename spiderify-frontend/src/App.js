@@ -23,7 +23,7 @@ const AppContainer = styled.div`
   "/spiderify_sans_search.png"});
   background-size: cover;
   height: 100%;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Open Sans', sans-serif;
 `;
 
 const PageLinkButton = styled(Button)`
