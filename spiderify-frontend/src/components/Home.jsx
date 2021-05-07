@@ -54,16 +54,34 @@ const Home = () => {
   const [urlInput, setUrlInput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loadedComments, setLoadedComments] = useState([]);
+  const [averageRating , setAverageRating] = useState(0);
 
   const getComments = () => {
     // TODO: fetch comments from server and set it in the state
     axios
-      .get("https://jsonplaceholder.typicode.com/todos/1")
+      .post('localhost:8000/api/v1/product' , {
+        url : urlInput
+      })
       .then((response) => {
-        console.log("response : ", response);
+        console.log("response : ", response.data);
+        console.log("these are comments");
+        console.log(response.data);
         setIsLoading(false);
-        setLoadedComments(comments.REVIEWS);
+
+        setLoadedComments(response.data.REVIEWS);
+        var avg = 0.0 ;
+        var sum = 0.0 ;
+        for(var i =0 ; i < response.data.REVIEWS.length ; i++)
+        {
+          sum += response.data.REVIEWS[i].rating;
+          console.log("sum rating is : " + sum);
+        }
+        console.log(response.data.REVIEWS.length);
+        avg = sum / response.data.REVIEWS.length ;
+        setAverageRating(avg);
+        console.log(sum + "/" + response.data.REVIEWS.length + "=" + avg );
       });
+
   };
 
   const onSearchClick = (event) => {
@@ -106,7 +124,7 @@ const Home = () => {
       </FormContainer>
 
       <div style={{ overflow: "auto", margin: "1rem 0" }}>
-        {loadedComments?.length && <CommentSection comments={loadedComments} />}
+        {loadedComments?.length && <CommentSection comments={loadedComments} average = {averageRating} />}
       </div>
     </>
   );
