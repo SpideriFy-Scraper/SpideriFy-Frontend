@@ -43,7 +43,7 @@ const DoughnutChartWrapper = ({good , bad}) =>
 }
 
 
-const BarChartWrapper = ()=>
+const BarChartWrapper = ({actualRating , estimationRating})=>
 {
   const options = {
     plugins : 
@@ -67,11 +67,11 @@ const BarChartWrapper = ()=>
     },
   };
   const BarDataMock = {
-    labels: ['bad comments', 'good comments'],
+    labels: ['actualRating', "algorithm estimation's"],
     datasets: [
       {
         label: 'for comparison',
-        data: [props.actualRating, props.estimationRating  , 5.0],
+        data: [actualRating , estimationRating  , 5.0],
         backgroundColor: [
           'rgba(255, 99, 132, 0.7)',
           'rgba(50, 240, 120, 0.7)',

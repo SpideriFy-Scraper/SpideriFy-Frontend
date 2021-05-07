@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import styled from "styled-components";
+import {commentsMock} from '../comments-mock'
 import Loading from "./Loading";
 import CommentSection from "./CommentSection";
 import axios from "axios";
@@ -56,41 +57,49 @@ const Home = () => {
   const [averageRating , setAverageRating] = useState(0);
   const [averageEstimation , setAverageEstimation] = useState(0);
   const [pieChartInfo , setPieChartInfo] = useState(null);
+
   const getComments = () => {
     // TODO: fetch comments from server and set it in the state
     axios
       .post('http://localhost:8080/api/v1/product' , {
-        url : urlInput
+        url : urlInput 
       })
       .then((response) => {
         console.log("these are comments");
         setIsLoading(false);
-        const comments = response.data ;
+        const comments = response.data;
+
         setLoadedComments(comments.REVIEWS);
+
         var avg = 0.0 ;
         var sum = 0.0 ;
         var avgOfEstimation = 0 ;
         var badCommentsCount = 0 ;
-        for(var i =0 ; i < comments.REVIEWS.length ; i++)
+        console.log("i reached here!");
+        for(let i = 0 ; i < comments.REVIEWS.length ; i++)
         {
           sum += comments.REVIEWS[i].rating;
         }
-        for(var i =0 ; i < comments.REVIEWS.length ; i++)
+        for(let i = 0 ; i < comments.REVIEWS.length ; i++)
         {
-          avgOfEstimation += comments.REVIEWS[i].sentiment ;
-          if(comments.REVIEWS[i].sentiment > 2.5)
+          avgOfEstimation += parseFloat(comments.REVIEWS[i].sentiment);
+          if(comments.REVIEWS[i].sentiment < 0.5)
           {
+            console.log(comments.REVIEWS[i].sentiment);
             badCommentsCount ++ ;
           }
         }
-        setPieChartInfo({goodComments : (comments.REVIEWS[i].length - badCommentsCount) , 
-                         badComments : badCommentsCount})
-        avgOfEstimation = avgOfEstimation / comments.REVIEWS.length ;
+        const goodCommentsCount = (comments.REVIEWS.length - badCommentsCount);
+        console.log("good components are : " + goodCommentsCount);
+        const chartInfo = {goodComments : goodCommentsCount , 
+          badComments : badCommentsCount}; 
+        setPieChartInfo(chartInfo);
+        console.log("avg of estimation" + avgOfEstimation);
+        avgOfEstimation = 5 * avgOfEstimation / comments.REVIEWS.length ;
+        console.log(avgOfEstimation);
         setAverageEstimation(avgOfEstimation);
-        console.log(comments.REVIEWS.length);
         avg = sum / comments.REVIEWS.length ;
         setAverageRating(avg);
-        console.log(sum + "/" + comments.REVIEWS.length + "=" + avg );
       });
 
   };
@@ -114,7 +123,7 @@ const Home = () => {
           <Form>
             <FormGroup>
               <Label for="url-address" style = {{margin : 'auto'}}>
-                <WhiteHeader>Please Enter You URL here</WhiteHeader>
+                <WhiteHeader>Please Enter Your URL Here</WhiteHeader>
               </Label>
               <div style = {{display : 'flex' , flexDirection : 'row'}}>
                 <Input
@@ -135,7 +144,7 @@ const Home = () => {
       </FormContainer>
 
       <div style={{ overflow: "auto", margin: "1rem 0" }}>
-        {loadedComments?.length && <CommentSection comments={loadedComments} pieChartInformation = {pieChartInfo}
+        {loadedComments?.length && pieChartInfo && <CommentSection comments={loadedComments} pieChartInformation = {pieChartInfo}
          averages = {{actualRating : averageRating , estimation : averageEstimation}} />}
       </div>
     </>
