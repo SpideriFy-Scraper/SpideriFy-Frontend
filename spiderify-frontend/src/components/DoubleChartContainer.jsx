@@ -4,14 +4,14 @@ import styled from 'styled-components'
 
 
 
-const DoughnutChartWrapper = () =>
+const DoughnutChartWrapper = ({good , bad}) =>
 {
   const data = {
     labels: ['bad comments', 'good comments'],
     datasets: [
       {
         label: '# of Votes',
-        data: [28, 19],
+        data: [bad , good],
         backgroundColor: [
           'rgba(255, 99, 132, 0.7)',
           'rgba(50, 240, 120, 0.7)',
@@ -71,7 +71,7 @@ const BarChartWrapper = ()=>
     datasets: [
       {
         label: 'for comparison',
-        data: [4.5, 3.7 , 5.0],
+        data: [props.actualRating, props.estimationRating  , 5.0],
         backgroundColor: [
           'rgba(255, 99, 132, 0.7)',
           'rgba(50, 240, 120, 0.7)',
@@ -100,13 +100,13 @@ const ChartsContainer = styled.div`
 
 
 
-const DoubleChartContainer = () => {
+const DoubleChartContainer = ({averageNumbers , pieChartInformation}) => {
   return(
    
       <div>
         <ChartsContainer>
-          <DoughnutChartWrapper/>
-          <BarChartWrapper/>
+          <DoughnutChartWrapper  good = {pieChartInformation.goodComments} bad = {pieChartInformation.badComments}/>
+          <BarChartWrapper actualRating = {averageNumbers.actualRating} estimationRating = {averageNumbers.estimation}/>
         </ChartsContainer>
       </div>
 

@@ -13,10 +13,10 @@ const ResultsWrapper = styled.div`
   margin-right : 14%;
 
 `;
-const CommentSection = ({ comments }) => {
+const CommentSection = ({ comments , pieChartInformation , averages }) => {
   return (
   <ResultsWrapper>
-    <DoubleChartContainer/>
+    <DoubleChartContainer averageNumbers = {averages} pieChartInformation = {pieChartInformation} />
     <CommentSectionContainer>
     
       {comments?.map((comment, index) => {
@@ -29,6 +29,8 @@ const CommentSection = ({ comments }) => {
 
 CommentSection.propTypes = {
   comments: PropTypes.array,
+  pieChartInformation : PropTypes.object ,
+  averages : PropTypes.object ,
 };
 
 export default CommentSection;

@@ -1,4 +1,4 @@
-export const comments = {
+export const commentsMock = {
   "ALL_REVIEW_URL": "https://www.amazon.com/HP-Business-Dual-core-Bluetooth-Legendary/product-reviews/B07VMDCLXV/ie=UTF8&reviewerType=all_reviews",
   "PRICE": null,
   "PRODUCT_DESCRIPTION": "",

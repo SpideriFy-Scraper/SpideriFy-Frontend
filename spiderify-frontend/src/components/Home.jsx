@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import styled from "styled-components";
 import Loading from "./Loading";
-import { comments } from "../comments-mock";
 import CommentSection from "./CommentSection";
 import axios from "axios";
 
@@ -55,31 +54,43 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadedComments, setLoadedComments] = useState([]);
   const [averageRating , setAverageRating] = useState(0);
-
+  const [averageEstimation , setAverageEstimation] = useState(0);
+  const [pieChartInfo , setPieChartInfo] = useState(null);
   const getComments = () => {
     // TODO: fetch comments from server and set it in the state
     axios
-      .post('localhost:8000/api/v1/product' , {
+      .post('http://localhost:8080/api/v1/product' , {
         url : urlInput
       })
       .then((response) => {
-        console.log("response : ", response.data);
         console.log("these are comments");
-        console.log(response.data);
         setIsLoading(false);
-
-        setLoadedComments(response.data.REVIEWS);
+        const comments = response.data ;
+        setLoadedComments(comments.REVIEWS);
         var avg = 0.0 ;
         var sum = 0.0 ;
-        for(var i =0 ; i < response.data.REVIEWS.length ; i++)
+        var avgOfEstimation = 0 ;
+        var badCommentsCount = 0 ;
+        for(var i =0 ; i < comments.REVIEWS.length ; i++)
         {
-          sum += response.data.REVIEWS[i].rating;
-          console.log("sum rating is : " + sum);
+          sum += comments.REVIEWS[i].rating;
         }
-        console.log(response.data.REVIEWS.length);
-        avg = sum / response.data.REVIEWS.length ;
+        for(var i =0 ; i < comments.REVIEWS.length ; i++)
+        {
+          avgOfEstimation += comments.REVIEWS[i].sentiment ;
+          if(comments.REVIEWS[i].sentiment > 2.5)
+          {
+            badCommentsCount ++ ;
+          }
+        }
+        setPieChartInfo({goodComments : (comments.REVIEWS[i].length - badCommentsCount) , 
+                         badComments : badCommentsCount})
+        avgOfEstimation = avgOfEstimation / comments.REVIEWS.length ;
+        setAverageEstimation(avgOfEstimation);
+        console.log(comments.REVIEWS.length);
+        avg = sum / comments.REVIEWS.length ;
         setAverageRating(avg);
-        console.log(sum + "/" + response.data.REVIEWS.length + "=" + avg );
+        console.log(sum + "/" + comments.REVIEWS.length + "=" + avg );
       });
 
   };
@@ -124,7 +135,8 @@ const Home = () => {
       </FormContainer>
 
       <div style={{ overflow: "auto", margin: "1rem 0" }}>
-        {loadedComments?.length && <CommentSection comments={loadedComments} average = {averageRating} />}
+        {loadedComments?.length && <CommentSection comments={loadedComments} pieChartInformation = {pieChartInfo}
+         averages = {{actualRating : averageRating , estimation : averageEstimation}} />}
       </div>
     </>
   );
