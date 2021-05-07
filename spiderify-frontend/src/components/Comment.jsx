@@ -44,9 +44,16 @@ const RightParagraph = styled.p`
 const WhiteDiv = styled.div`
   color: white;
 `;
+const RateContainer = styled.div`
+  color : white ;
+  clear : both;
+`;
 
 const ClearBothDiv = styled.div`
   clear: both;
+`;
+const CommentParagraph = styled.p`
+  margin : 8px ;
 `;
 
 function Comment({ commentSpec }) {
@@ -58,10 +65,10 @@ function Comment({ commentSpec }) {
         </CommentHeader>
         <CommentDateSection>{commentSpec.date}</CommentDateSection>
         <CommentContentContainer>
-          <p>{commentSpec.content}</p>
+          <CommentParagraph>{commentSpec.content}</CommentParagraph>
           <WhiteDiv>
             <LeftParagraph>
-              analysed result : {commentSpec.sentiment}
+              analysed result : {commentSpec.sentiment * 5}
             </LeftParagraph>
             <RightParagraph>
               {commentSpec.verified && "costumer is verified"}
@@ -69,6 +76,11 @@ function Comment({ commentSpec }) {
           </WhiteDiv>
         </CommentContentContainer>
         <ClearBothDiv />
+        <div style = {{marginLeft : '8px', paddingBottom : '1px' }}>
+          <p>
+            actual rating : {commentSpec.rating}
+          </p>
+        </div>
       </div>
     </CommnetContainer>
   );

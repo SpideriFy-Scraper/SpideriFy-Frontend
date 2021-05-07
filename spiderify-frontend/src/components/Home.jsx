@@ -5,7 +5,6 @@ import Loading from "./Loading";
 import { comments } from "../comments-mock";
 import CommentSection from "./CommentSection";
 import axios from "axios";
-import DoubleChartContainer from './DoubleChartContainer'
 
 const FormContainer = styled.div`
   display: flex;
@@ -28,7 +27,7 @@ const FormContainer = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  width : 40% ;
+  width : 60% ;
   
 `
 
@@ -46,7 +45,10 @@ const WhiteHeader = styled.h3`
   color: white;
   font-size: 2rem;
 `;
-
+const SearchBarHolder = styled.div`
+  display : flex ;
+  flex-direction : row;
+`;
 
 const Home = () => {
   const [urlInput, setUrlInput] = useState(null);
@@ -60,7 +62,7 @@ const Home = () => {
       .then((response) => {
         console.log("response : ", response);
         setIsLoading(false);
-        setLoadedComments(comments);
+        setLoadedComments(comments.REVIEWS);
       });
   };
 

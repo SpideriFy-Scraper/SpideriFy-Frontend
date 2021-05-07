@@ -24,10 +24,19 @@ const DoughnutChartWrapper = () =>
       },
     ],
   };
+  const options = {
+    plugins : 
+    {
+      title : {
+        display : true ,
+        text : 'good comments and bad comments'
+      }
+    },
+    };
 
   return (
     <div style = {{height : '100%'}}>
-        <Doughnut data={data} style = {{marginRight : '8px' , backgroundColor : 'rgba(150 , 150 , 150 , 0.2)'}} />
+        <Doughnut data={data} options = {options} style = {{marginRight : '8px' , backgroundColor : 'rgba(150 , 150 , 150 , 0.2)'}} />
     </div>
   )
   
@@ -77,7 +86,7 @@ const BarChartWrapper = ()=>
   };
 
   return (
-    <Bar data = {BarDataMock} options = {options} style = {{backgroundColor : 'rgba(150 , 150 , 150 , 0.2)' , height : '100%' }} />
+    <Bar data = {BarDataMock} options = {options} style = {{backgroundColor : 'rgba(150 , 150 , 150 , 0.2)' , height : '100%'  }} />
   )
 }
 
