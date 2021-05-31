@@ -20,8 +20,8 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-image: url(${process.env.PUBLIC_URL +
-  "/spiderify_sans_search.png"});
+  background: url(${process.env.PUBLIC_URL +
+  "/spiderify_sans_search.png"}) no-repeat center fixed;
   background-size: cover;
   height: 100%;
   font-family: 'Open Sans', sans-serif;
