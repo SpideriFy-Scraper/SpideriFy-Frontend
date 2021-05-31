@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import About from "./components/About";
 import FAQ from "./components/FAQ";
 import Home from "./components/Home";
+import LoginForm from "./components/LoginForm"
 import styled from "styled-components";
 
 const LinksContainer = styled.div`
@@ -57,6 +58,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/FAQ" component={FAQ} />
           <Route path="/about" component={About} />
+          <Route path="/Login" component={LoginForm} />
         </Switch>
       </AppContainer>
     </BrowserRouter>
