@@ -63,9 +63,6 @@ const LoginForm = () => {
 
             </StyledForm>
         </Wrapper>)
-
-
-
 };
 
 

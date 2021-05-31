@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Label } from 'reactstrap'
+import { Label } from 'reactstrap';
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
     margin : 0 auto ;
@@ -18,6 +19,7 @@ const StyledButton = styled.button`
     margin-top : 8px ;
     margin-bottom : 8px ;
     width : 100%;
+    padding : 8px;
     color : white ;
     background-color : rgb(67, 149, 217) ;
     transition-duration : 0.7s;
@@ -31,7 +33,7 @@ const AlignMiddle = styled.div`
 `;
 const StyledInputField = styled.input`
     margin : 10px auto ;
-    padding : 4px ;
+    padding : 8px ;
     text-align : middle ;
     width : 100% ;
 `;
@@ -47,9 +49,12 @@ const StyledSecondaryButton = styled.button`
     border-radius : 12px ;
     transition-duration : 0.7s;
 
-
     &:hover {
         background-color : rgba(190, 40, 90, 1) ;
+    }
+    >a{
+        text-decoration : none ;
+        color : white ;
     }
 
 `;
@@ -60,6 +65,7 @@ const SecondaryButtonsWrapper = styled.div`
     flex-flow : row wrap ;
     align-items : stretch ;
 
+    
 `;
 
 const LoginForm = () => {
@@ -86,8 +92,8 @@ const LoginForm = () => {
                     <StyledSecondaryButton>
                         Forgot my Password
                     </StyledSecondaryButton>
-                    <StyledSecondaryButton>
-                        Sign up
+                    <StyledSecondaryButton >
+                        <Link to="/SignUp">Sign up</Link>
                     </StyledSecondaryButton>
                 </SecondaryButtonsWrapper>
             </StyledForm>
