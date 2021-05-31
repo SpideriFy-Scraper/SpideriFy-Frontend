@@ -6,7 +6,7 @@ const Wrapper = styled.div`
     margin : 0 auto ;
     text-align : midlle ;
     background-color : rgba(137, 150, 149 , 0.8);
-    width : 400px ;
+    width : 360px ;
     align-items : center;
     border-radius : 12px ;
 
