@@ -7,7 +7,9 @@ import About from "./components/About";
 import FAQ from "./components/FAQ";
 import Home from "./components/Home";
 import LoginForm from "./components/LoginForm"
+import SignUp from "./components/SignUp"
 import styled from "styled-components";
+
 
 const LinksContainer = styled.div`
   display: flex;
@@ -59,6 +61,7 @@ function App() {
           <Route path="/FAQ" component={FAQ} />
           <Route path="/about" component={About} />
           <Route path="/Login" component={LoginForm} />
+          <Route path="/signup" component={SignUp} />
         </Switch>
       </AppContainer>
     </BrowserRouter>

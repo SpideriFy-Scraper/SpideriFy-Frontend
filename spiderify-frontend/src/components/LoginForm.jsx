@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Label } from 'reactstrap'
+import { Label } from 'reactstrap'
 
 const Wrapper = styled.div`
     margin : 0 auto ;
@@ -9,8 +9,6 @@ const Wrapper = styled.div`
     width : 360px ;
     align-items : center;
     border-radius : 12px ;
-
-    
 `;
 const StyledForm = styled.form`
     padding : 12px ;
