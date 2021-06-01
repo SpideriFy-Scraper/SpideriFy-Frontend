@@ -71,6 +71,7 @@ const LoginForm = () => {
     const [UserNameInput, setUserNameInput] = useState(null);
     const [PassWordInput, setPassWordInput] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
     const onUserNameChange = ({ target }) => {
         setUserNameInput(target?.value);
@@ -81,6 +82,10 @@ const LoginForm = () => {
         console.log(target?.value);
     };
 
+    const onRememberMeChange = ({ target }) => {
+        setRememberMe(target?.checked);
+        console.log(target?.checked);
+    }
     return (
         <Wrapper>
             <StyledForm>
@@ -95,8 +100,8 @@ const LoginForm = () => {
                         Login
                     </StyledButton>
                 </AlignMiddle>
-                <input type="checkbox" />
-                <Label style={{ padding: "4px" }}>
+                <input type="checkbox" onChange={onRememberMeChange} />
+                <Label style={{ padding: "4px" }} >
                     Remember me
                 </Label>
                 <br />
