@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Label } from 'reactstrap';
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Wrapper = styled.div`
     margin : 0 auto ;
@@ -67,13 +68,26 @@ const SecondaryButtonsWrapper = styled.div`
 `;
 
 const LoginForm = () => {
+    const [UserNameInput, setUserNameInput] = useState(null);
+    const [PassWordInput, setPassWordInput] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const onUserNameChange = ({ target }) => {
+        setUserNameInput(target?.value);
+        console.log(target?.value);
+    };
+    const onPassWordChange = ({ target }) => {
+        setPassWordInput(target?.value);
+        console.log(target?.value);
+    };
+
     return (
         <Wrapper>
             <StyledForm>
                 <fieldset>
-                    <StyledInputField type="name" placeholder="Username" />
+                    <StyledInputField type="name" placeholder="Username" onChange={onUserNameChange} />
                     <br />
-                    <StyledInputField type="password" placeholder="Password" />
+                    <StyledInputField type="password" placeholder="Password" onChange={onPassWordChange} />
                 </fieldset>
 
                 <AlignMiddle>
@@ -82,7 +96,7 @@ const LoginForm = () => {
                     </StyledButton>
                 </AlignMiddle>
                 <input type="checkbox" />
-                <Label>
+                <Label style={{ padding: "4px" }}>
                     Remember me
                 </Label>
                 <br />
