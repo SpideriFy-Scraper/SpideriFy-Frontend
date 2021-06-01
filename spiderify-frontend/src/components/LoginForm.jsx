@@ -64,8 +64,6 @@ const SecondaryButtonsWrapper = styled.div`
     justify-content : center ;
     flex-flow : row wrap ;
     align-items : stretch ;
-
-    
 `;
 
 const LoginForm = () => {
@@ -98,9 +96,6 @@ const LoginForm = () => {
                 </SecondaryButtonsWrapper>
             </StyledForm>
         </Wrapper>)
-
-
-
 };
 
 
