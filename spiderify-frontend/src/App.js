@@ -7,7 +7,7 @@ import About from "./components/About";
 import FAQ from "./components/FAQ";
 import Home from "./components/Home";
 import LoginForm from "./components/LoginForm"
-import SignUp from "./components/SignUp"
+import SignUpForm from "./components/SignUp"
 import styled from "styled-components";
 
 
@@ -61,7 +61,7 @@ function App() {
           <Route path="/FAQ" component={FAQ} />
           <Route path="/about" component={About} />
           <Route path="/Login" component={LoginForm} />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/signup" component={SignUpForm} />
         </Switch>
       </AppContainer>
     </BrowserRouter>

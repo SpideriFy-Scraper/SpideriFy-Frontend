@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Label } from 'reactstrap'
+import { Tooltip } from 'reactstrap'
 
 const Wrapper = styled.div`
     margin : 0 auto ;
@@ -43,16 +43,53 @@ const StyledFieldSet = styled.fieldset`
     margin-bottom : 12px ;
 `;
 
-const LoginForm = () => {
+const SignUpForm = () => {
+
+    const [passwordConfirmation, setPasswordConfirmation] = useState(false);
+
+    const [PasswordInput, setPasswordInput] = useState(null);
+    const [passwordConfirmationInput, setPasswordConfirmationInput] = useState(null);
+    const [toolTipOpen, setToolTipOpen] = useState(false);
+
+    const onPasswordChange = ({ target }) => {
+        setPasswordInput(target?.value);
+        if (target?.value != passwordConfirmationInput) {
+            setToolTipOpen(true);
+        }
+        else if (target?.value == passwordConfirmationInput || target?.value.length == 0) {
+            setToolTipOpen(false);
+        }
+        console.log(target?.value);
+    }
+    const onPasswordConfirmationChange = ({ target }) => {
+        setPasswordConfirmationInput(target?.value);
+        if (target?.value != PasswordInput) {
+            setToolTipOpen(true);
+        }
+        else if (target?.value == PasswordInput || target?.value.length == 0) {
+            setToolTipOpen(false);
+        }
+        console.log(target?.value);
+    }
+
     return (
         <Wrapper>
             <StyledForm>
                 <StyledFieldSet>
                     <StyledInputField type="name" placeholder="Username" />
                 </StyledFieldSet>
+
+                <StyledFieldSet>
+                    <StyledInputField type="email" placeholder="email" />
+                </StyledFieldSet>
+
                 <fieldset>
-                    <StyledInputField type="password" placeholder="Password" />
-                    <StyledInputField type="password" placeholder="confirm your passoword" />
+                    <StyledInputField type="password" placeholder="Password" onChange={onPasswordChange} />
+                    <StyledInputField type="password" placeholder="confirm your passoword"
+                        onChange={onPasswordConfirmationChange} id="passwordConfirmInput" />
+                    <Tooltip placement="top" isOpen={toolTipOpen} autohide={false} target="passwordConfirmInput" >
+                        password confirmation is not equal to password
+                    </Tooltip>
                 </fieldset>
 
                 <AlignMiddle>
@@ -66,4 +103,4 @@ const LoginForm = () => {
 };
 
 
-export default LoginForm;
+export default SignUpForm;
