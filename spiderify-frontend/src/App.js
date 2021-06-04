@@ -5,25 +5,25 @@ import { Button } from "reactstrap";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import About from "./components/About";
 import FAQ from "./components/FAQ";
+import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
 import Home from "./components/Home";
-import LoginForm from "./components/LoginForm"
-import SignUpForm from "./components/SignUp"
 import styled from "styled-components";
+import Profile from "./components/Profile";
 
-
-const LinksContainer = styled.div`
+const LinksContainer = styled.div `
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin: 1rem 0;
 `;
 
-const AppContainer = styled.div`
+const AppContainer = styled.div `
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background: url(${process.env.PUBLIC_URL +
-  "/spiderify_sans_search.png"}) no-repeat center fixed;
+  background-image: url(${process.env.PUBLIC_URL +
+  "/spiderify_sans_search.png"});
   background-size: cover;
   height: 100%;
   font-family: 'Open Sans', sans-serif;
@@ -37,35 +37,71 @@ const PageLinkButton = styled(Button)`
   }
 `;
 
-function App() {
-  return (
-    <BrowserRouter>
-      <AppContainer>
-        <LinksContainer>
-          <PageLinkButton color="danger">
-            <Link to="/">Home</Link>
-          </PageLinkButton>
-          <PageLinkButton color="danger">
-            <Link to="/contactus">Contact us</Link>
-          </PageLinkButton>
-          <PageLinkButton color="danger">
-            <Link to="/FAQ">FAQ</Link>
-          </PageLinkButton>
-          <PageLinkButton color="danger">
-            <Link to="/about">about</Link>
-          </PageLinkButton>
-        </LinksContainer>
+const PageSignIn_UpButton = styled(Button)`
+  margin-left: 47rem;
+  margin-right: 1rem;
+  > a {
+    text-decoration: none;
+    color: white;
+  }
+`;
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/FAQ" component={FAQ} />
-          <Route path="/about" component={About} />
-          <Route path="/Login" component={LoginForm} />
-          <Route path="/signup" component={SignUpForm} />
-        </Switch>
-      </AppContainer>
-    </BrowserRouter>
-  );
+function App() {
+    return  <
+        BrowserRouter >
+        <
+        AppContainer >
+        <
+        LinksContainer >
+        <
+        PageLinkButton color = "danger" >
+        <
+        Link to = "/" > Home < /Link> <
+        /PageLinkButton> <
+        PageLinkButton color = "danger" >
+        <
+        Link to = "/contactus" > Contact us < /Link> <
+        /PageLinkButton> <
+        PageLinkButton color = "danger" >
+        <
+        Link to = "/FAQ" > FAQ < /Link> <
+        /PageLinkButton> <
+        PageLinkButton color = "danger" >
+        <
+        Link to = "/about" > about < /Link> <
+        /PageLinkButton> <
+        PageSignIn_UpButton color = "danger" id="SignUp" >
+        <
+        Link to = "/SignUp" > SignUp < /Link> <
+        /PageSignIn_UpButton> <
+        PageLinkButton color = "danger" id="LogIn">
+        <
+        Link to = "/user/profile" > LogIn < /Link> <
+        /PageLinkButton> <
+        /LinksContainer>
+
+        <
+        Switch >
+        <
+        Route exact path = "/"
+        component = { Home }
+        /> <
+        Route path = "/FAQ"
+        component = { FAQ }
+        /> <
+        Route path = "/about"
+        component = { About }
+        /> <
+        Route path = "/SignUp"
+        component = { SignUp }
+        /> <
+        Route path = "/user/LogIn"
+        component = { LogIn }
+        /> <Route path="/user/profile" component={Profile}
+                  /> <
+        /Switch> <
+        /AppContainer> <
+        /BrowserRouter>
 }
 
 export default App;

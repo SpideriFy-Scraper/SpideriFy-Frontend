@@ -1,106 +1,182 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import styled from "styled-components";
-import { Tooltip } from 'reactstrap'
+import axios from "axios";
 
-const Wrapper = styled.div`
-    margin : 0 auto ;
-    text-align : midlle ;
-    background-color : rgba(137, 150, 149 , 0.8);
-    width : 360px ;
-    align-items : center;
-    border-radius : 20px ;
-`;
-const StyledForm = styled.form`
-    padding : 12px ;
-`;
-const StyledButton = styled.button`
-    border-radius : 24px ;
-    margin-top : 12px ;
-    margin-bottom : 8px ;
-    width : 100%;
-    color : white ;
-    padding : 6px ;
-    background-color : rgb(67, 149, 217) ;
-    transition-duration : 0.7s;
-    &:hover {
-        background-color : rgb(40, 95, 250) ;
+const FormContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  width: 100%;
+  > form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    > .form-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
     }
-
-`;
-const AlignMiddle = styled.div`
-    margin : 0 auto ;
-`;
-const StyledInputField = styled.input`
-    margin : 10px auto 0px 0px;
-    border-radius : 4px ;
-    padding : 8px ;
-    text-align : middle ;
-    width : 100% ;
+  }
 `;
 
-
-const StyledFieldSet = styled.fieldset`
-    margin-bottom : 12px ;
+const FormWrapper = styled.div`
+  width : 30% ;
+  margin-right: 1rem;
 `;
 
-const SignUpForm = () => {
+const WhiteHeader = styled.h3`
+  color: white;
+  font-size: 2rem;
+  text-align: center
+`;
+const Lab = styled.label`
+  color: white;
+`;
 
-    const [passwordConfirmation, setPasswordConfirmation] = useState(false);
+const SignUp = () => {
 
-    const [PasswordInput, setPasswordInput] = useState(null);
-    const [passwordConfirmationInput, setPasswordConfirmationInput] = useState(null);
-    const [toolTipOpen, setToolTipOpen] = useState(false);
+    const [Username, setUsername] = useState(null);
+    const [Password, setPassword] = useState(null);
+    const [Firstname, setFirstname] = useState(null);
+    const [Lastname, setLastname] = useState(null);
+    const [Email, setEmail] = useState(null);
+    const [Phonenumber, setPhonenumber] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const onSignUpClick = (event) => {
+        // TODO: fetch comments from server and set it in the state
+        setIsLoading(true)
+        axios
+            .post('http://192.168.30.128/SignUp' , {
+                username : Username,
+                password : Password,
+                firstname : Firstname,
+                lastname : Lastname,
+                email : Email,
+                setPhonenumber : Phonenumber
+            })
+            .then((response) => {
+                setIsLoading(false);
+                const result = response.data;
+                if (response.status == 301)
+                    window.alert("username has been registered! try another username");
+                else if(response.status == 302)
+                    window.alert("email has been registered! try another email");
+                else if(response.status == 200)
+                    window.alert("you have successfully logged in");
+                else
+                    window.alert("sorry sth is wrong!!! ");
+            });
+    };
+
+    const onUsernameChange = ({ target }) => {
+        setUsername(target?.value);
+    };
 
     const onPasswordChange = ({ target }) => {
-        setPasswordInput(target?.value);
-        if (target?.value != passwordConfirmationInput) {
-            setToolTipOpen(true);
-        }
-        else if (target?.value == passwordConfirmationInput || target?.value.length == 0) {
-            setToolTipOpen(false);
-        }
-        console.log(target?.value);
-    }
-    const onPasswordConfirmationChange = ({ target }) => {
-        setPasswordConfirmationInput(target?.value);
-        if (target?.value != PasswordInput) {
-            setToolTipOpen(true);
-        }
-        else if (target?.value == PasswordInput || target?.value.length == 0) {
-            setToolTipOpen(false);
-        }
-        console.log(target?.value);
-    }
+        setPassword(target?.value);
+    };
+
+    const onFirstnameChange = ({ target }) => {
+        setFirstname(target?.value);
+    };
+
+    const onLastnameChange = ({ target }) => {
+        setLastname(target?.value);
+    };
+
+    const onEmailChange = ({ target }) => {
+        setEmail(target?.value);
+    };
+
+    const onPhonenumberChange = ({ target }) => {
+        setPhonenumber(target?.value);
+    };
 
     return (
-        <Wrapper>
-            <StyledForm>
-                <StyledFieldSet>
-                    <StyledInputField type="name" placeholder="Username" />
-                </StyledFieldSet>
+        <div>
+            <WhiteHeader>Register</WhiteHeader>
+            <FormContainer>
+                <FormWrapper>
+                    <div className="form-group">
+                        <Lab>First name</Lab>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter First name"
+                            onChange={onFirstnameChange}
+                        />
+                    </div>
 
-                <StyledFieldSet>
-                    <StyledInputField type="email" placeholder="email" />
-                </StyledFieldSet>
+                    <div className="form-group">
+                        <Lab>Email</Lab>
+                        <input
+                            type="email"
+                            className="form-control"
+                            placeholder="Enter email"
+                            onChange={onEmailChange}
+                        />
+                    </div>
 
-                <fieldset>
-                    <StyledInputField type="password" placeholder="Password" onChange={onPasswordChange} />
-                    <StyledInputField type="password" placeholder="confirm your passoword"
-                        onChange={onPasswordConfirmationChange} id="passwordConfirmInput" />
-                    <Tooltip placement="top" isOpen={toolTipOpen} autohide={false} target="passwordConfirmInput" >
-                        password confirmation is not equal to password
-                    </Tooltip>
-                </fieldset>
+                    <div className="form-group">
+                        <Lab>Username</Lab>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter Username"
+                            onChange={onUsernameChange}
+                        />
+                    </div>
 
-                <AlignMiddle>
-                    <StyledButton type="submit" >
-                        Sign up
-                    </StyledButton>
-                </AlignMiddle>
+                    <button
+                        type="submit"
+                        className="btn btn-dark btn-lg btn-block"
+                        onClick={onSignUpClick}
+                    >
+                        Register
+                    </button>
+                    <Lab >
+                        Already registered <a href="/user/LogIn">log in?</a>
+                    </Lab>
+                </FormWrapper>
 
-            </StyledForm>
-        </Wrapper>)
-};
+                <FormWrapper>
+                    <div className="form-group">
+                        <Lab>Last name</Lab>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Enter Last name"
+                            onChange={onLastnameChange}
+                        />
+                    </div>
 
+                    <div className="form-group">
+                        <Lab>Phone number</Lab>
+                        <input
+                            type="tel"
+                            className="form-control"
+                            placeholder="Enter Phone number"
+                            onChange={onPhonenumberChange}
+                        />
+                    </div>
 
-export default SignUpForm;
+                    <div className="form-group">
+                        <Lab>Password</Lab>
+                        <input
+                            type="password"
+                            className="form-control"
+                            placeholder="Enter password"
+                            onChange={onPasswordChange}
+                        />
+                    </div>
+                </FormWrapper>
+            </FormContainer>
+        </div>
+    );
+}
+
+export default SignUp
