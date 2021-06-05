@@ -58,13 +58,10 @@ const Profile = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const urlset = [
-        "https://web.dev/virtualize-long-lists-react-window/",
-        "https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_outputh",
-        "https://web.dev/virtualize-long-lists-react-window/",
-        "https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_outputh",
-        "https://web.dev/virtualize-long-lists-react-window/",
-        "https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_outputh",
-
+        "https://www.amazon.com/Roku-Streaming-Stick-HDR-Streaming-Long-range/dp/B075XLWML4/ref=lp_16225009011_1_5",
+        "https://www.amazon.com/HP-24mh-FHD-Monitor-Built/dp/B08BF4CZSV/ref=lp_16225009011_1_6",
+        "https://www.amazon.com/Apple-EarPods-Lightning-Connector-White/dp/B01M0GB8CC/ref=lp_16225009011_1_4",
+        "https://www.amazon.com/Mkeke-Compatible-iPhone-Protector-Tempered/dp/B07HRN9J19/ref=lp_16225009011_1_12",
     ];
 
     const RenderRow = ({ index }) => (
@@ -122,7 +119,7 @@ const Profile = () => {
                     <input
                         type="text"
                         className="form-control"
-                        defaultValue="value"
+                        defaultValue="homayoon Sadeghi"
                         onChange={onFullnameChange}
                     />
                 </div>
@@ -132,7 +129,7 @@ const Profile = () => {
                     <input
                         type="email"
                         className="form-control"
-                        placeholder="Enter email"
+                        defaultValue="homayoon.9171@gmail.com"
                         onChange={onEmailChange}
                     />
                 </div>
@@ -142,7 +139,7 @@ const Profile = () => {
                     <input
                         type="tel"
                         className="form-control"
-                        placeholder="Enter Phone number"
+                        defaultValue="09339997777"
                         onChange={onPhonenumberChange}
                     />
                 </div>
@@ -165,7 +162,7 @@ const Profile = () => {
             <div>
                 <WhiteHeader>History</WhiteHeader>
 
-                <StyledFixedSizeList height={300} width={600} itemSize={46} itemCount={10}>
+                <StyledFixedSizeList height={300} width={700} itemSize={46} itemCount={10}>
                     {/*{urlset?.map((value, index) => {*/}
                     {/*    return <div key={index}>{value}</div>;*/}
                     {/*})}*/}

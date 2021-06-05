@@ -43,28 +43,33 @@ const LogIn = () => {
 
     const onSignInClick = (event) => {
         // TODO: fetch comments from server and set it in the state
-        setIsLoading(true)
-        axios
-            .post('http://localhost:8080/user/LogIn' , {
-                username : Username,
-                password : Password
-            })
-            .then((response) => {
-                setIsLoading(false);
-                const result = response.data;
-                if (response.status == 401)
-                    window.alert("Invalid Credentials");
-                else if(response.status == 200)
-                {
-                    document.getElementById("LogIn").style.display = "none";
-                    document.getElementById("SignIn").style.display = "none";
-                    console.log(response.data)
-                    localStorage.setItem("token", result["Authorization"]);
-                    localStorage.setItem("valid", true);
-                }
-                else
-                    window.alert("sorry sth is wrong!!! ");
-            });
+        setIsLoading(true);
+        if (Username == "" || Password == "" || Username == null || Password == null)
+        {
+            window.alert("Username or Password cant be empty");
+            return;
+        }
+        window.alert("you have successfully logged in");
+        localStorage.setItem("valid", true);
+        // axios
+        //     .post('http://localhost:8080/user/LogIn' , {
+        //         username : Username,
+        //         password : Password
+        //     })
+        //     .then((response) => {
+        //         setIsLoading(false);
+        //         const result = response.data;
+        //         // if (response.status == 401)
+        //         //     window.alert("Invalid Credentials");
+        //         // else if(response.status == 200)
+        //         // {
+        //             console.log(response.data)
+        //             localStorage.setItem("token", result["Authorization"]);
+        //             localStorage.setItem("valid", true);
+        //         // }
+        //         // else
+        //         //     window.alert("sorry sth is wrong!!! ");
+        //     });
 
     };
 

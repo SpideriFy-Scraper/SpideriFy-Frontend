@@ -66,7 +66,7 @@ const SignUp = () => {
                 else if(response.status == 401)
                     window.alert("Invalid Email");
                 else if(response.status == 200)
-                    window.alert("you have successfully logged in");
+                    window.alert("your account have been successfully registered");
                 else
                     window.alert("sorry sth is wrong!!! ");
             });
