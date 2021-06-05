@@ -46,26 +46,26 @@ const SignUp = () => {
     const [Phonenumber, setPhonenumber] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const onSignUpClick = (event) => {
+    const onSignInClick = (event) => {
         // TODO: fetch comments from server and set it in the state
         setIsLoading(true)
         axios
-            .post('http://192.168.30.128/SignUp' , {
-                username : Username,
-                password : Password,
-                firstname : Firstname,
-                lastname : Lastname,
-                email : Email,
-                setPhonenumber : Phonenumber
+            .post('http://localhost:8080/SignUp', {
+                username: Username,
+                password: Password,
+                firstname: Firstname,
+                lastname: Lastname,
+                email: Email,
+                setPhonenumber: Phonenumber
             })
             .then((response) => {
                 setIsLoading(false);
                 const result = response.data;
-                if (response.status == 400)
-                    window.alert("username or email has been registered! try another username");
-                else if(response.status == 401)
-                    window.alert("Invalid Email");
-                else if(response.status == 200)
+                if (response.status == 301)
+                    window.alert("username has been registered! try another username");
+                else if (response.status == 302)
+                    window.alert("email has been registered! try another email");
+                else if (response.status == 200)
                     window.alert("you have successfully logged in");
                 else
                     window.alert("sorry sth is wrong!!! ");
@@ -131,13 +131,7 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <button
-                        type="submit"
-                        className="btn btn-dark btn-lg btn-block"
-                        onClick={onSignUpClick}
-                    >
-                        Register
-                    </button>
+                    <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={onSignInClick}>Register</button>
                     <Lab >
                         Already registered <a href="/user/LogIn">log in?</a>
                     </Lab>

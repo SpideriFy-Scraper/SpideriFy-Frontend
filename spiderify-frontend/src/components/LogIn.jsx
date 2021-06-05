@@ -53,13 +53,14 @@ const LogIn = () => {
                 setIsLoading(false);
                 const result = response.data;
                 if (response.status == 401)
-                    window.alert("wrong username or password");
+                    window.alert("Invalid Credentials");
                 else if(response.status == 200)
                 {
                     document.getElementById("LogIn").style.display = "none";
                     document.getElementById("SignIn").style.display = "none";
                     console.log(response.data)
-                    //
+                    localStorage.setItem("token", result["Authorization"]);
+                    localStorage.setItem("valid", true);
                 }
                 else
                     window.alert("sorry sth is wrong!!! ");
